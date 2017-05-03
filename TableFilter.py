@@ -1,4 +1,4 @@
-lf# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 (@)Author: glassCodeBender
 (#)Title: TableFilter.py
@@ -59,7 +59,7 @@ class TableFilter(object):
     """ Export to filtered DataFrame to CSV file. """
     def export_to_CSV(self):
         fileDestination = self.__file_dest
-        df = self.filterDataFrame()
+        df = self.filter_df()
         df.to_csv(fileDestination)
         """
         if __main__ == __name__:
