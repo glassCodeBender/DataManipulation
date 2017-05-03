@@ -4,7 +4,19 @@ lf# -*- coding: utf-8 -*-
 (#)Title: TableFilter.py
 (#)Version: 1.0
 
-Program Purpose: Experiment with filtering csv files.
+Program Purpose: Program allows users to remove duplicates from a column. The actual purpose of the program was to
+remove duplicate rows from an excel file so that I could use the sample data in a database for a school project. Eventually
+I will allow the program to accept commandline arguments. Since it is a full program instead of a script, I need to use
+a different program than system.argv.
+
+Inputs:
+
+__file1 : Accepts String filename. Currently accepts only csv files.
+__duplicate : Accepts a String. User determines the name of the column to remove duplicate rows based on 
+    - I used 'Customer Name' in my program to remove duplicate customers.
+__file_destination : Determines where the newly created csv file should save to. 
+    - I need to rewrite the program so that it saves to the default working directory when I add commandline arguments.
+      
 
 NEED TO ADD __main__ == __name__ and help functionality. 
 
