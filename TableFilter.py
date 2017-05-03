@@ -36,10 +36,8 @@ class TableFilter(object):
         self.__duplicate = duplicate_column_name
         self.__file_dest = file_destination
 
-    """
-        Description: Method filters out the unique values in the column of a csv file.
-        Return: DataFrame excluding the value
-    """
+    """ Description: Method filters out the unique values in the column of a csv file.
+        Return: DataFrame excluding the value """
 
     def populate_df(self):
         try:
@@ -50,10 +48,9 @@ class TableFilter(object):
             print("I/O error: The file did not import properly.")
         return pop_df
 
-        """        
-        Create a column of boolean values 
-        Check to see if the previous value in the column is equal
-        """
+    """ Create a column of boolean values 
+        Check to see if the previous value in the column is equal 
+        Return: DataFram"""
 
     def filter_uniq(self):
         dup = self.__duplicate
@@ -62,7 +59,8 @@ class TableFilter(object):
         filtered_df = pop_df[pop_df['Unique'] == False]
         return filtered_df
 
-    """ Export to filtered DataFrame to CSV file. """
+    """ Export to filtered DataFrame to CSV file. 
+        Return: Void """
 
     def export_to_CSV(self):
         fileDestination = self.__file_dest
@@ -72,7 +70,7 @@ class TableFilter(object):
         if __main__ == __name__:
         """
 
-    # Process command-line arguments.
+    """ Process command-line arguments. """
     if __name__ == '__main__':
         
         parser = argparse.ArgumentParser(add_help=True, description="Allows users to filter CSV file in a variety of ways.")
