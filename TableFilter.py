@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+lf# -*- coding: utf-8 -*-
 """
 (@)Author: glassCodeBender
 (#)Title: TableFilter.py
@@ -16,9 +16,9 @@ import pandas as pd
 
 class TableFilter(object):
     def __init__(self, file='', duplicate_column_name='', file_destination = ''):
-        set.__file1 = file
-        set.__duplicate = duplicate_column_name
-        set.__file_dest = file_destination
+        self.__file1 = file
+        self.__duplicate = duplicate_column_name
+        self.__file_dest = file_destination
 
     """
         Description: Method filters out the unique values in the column of a csv file.
