@@ -82,7 +82,7 @@ class TableFilter(object):
         parser = argparse.ArgumentParser(add_help=True, description="Allows users to filter CSV file in a variety of ways.")
         parser.add_argument('-f', action='store', dest = 'file', help='Store the name of the csv file you want converted')
         parser.add_argument('-c', action='store', dest = 'column', help='Store the name of the column you want filtered.')
-        parser.add_argument('-d', action='store', dest = 'file_destination', default= str( os.getcwd() ) + "filteredcsvfile.csv", help= "Store the name of the file you'd like the program to create")
+        parser.add_argument('-d', action='store', dest = 'file_destination', default= str( os.getcwd() ) + "/filteredcsvfile.csv", help= "Store the name of the file you'd like the program to create")
 
         if len(sys.argv) <= 2:
             parser.print_help()
