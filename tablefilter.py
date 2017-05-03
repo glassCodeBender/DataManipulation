@@ -4,6 +4,9 @@
 (#)Title: TableFilter.py
 (#)Version: 1.0
 
+WARNING: Currently the program does not work from the commandline. However, the main aspects of the program work. I already
+used them to filter out duplicate names from an excel document.
+
 Program Purpose: Program allows users to remove duplicates from a column in a csv file (or excel converted to csv). The actual purpose
 of the program was to remove duplicate rows from an excel file so that I could use the sample data in a database for a school project. 
 Eventually I will design the program to accept commandline arguments. However, since the current program is a full program instead of 
@@ -29,12 +32,13 @@ import argparse
 import os
 import sys
 
-
 class TableFilter(object):
-    def __init__(self, file='', duplicate_column_name='', file_destination=''):
-        self.__file1 = file
-        self.__duplicate = duplicate_column_name
-        self.__file_dest = file_destination
+    def __init__(self):
+        self.__file = args.file
+        self.__duplicate_column = args.duplicate_column
+        self.__file_dest = args.file_dest
+        # Adding extra functionality to program
+        self.__compare = args.compare
 
     """
         Description: Method filters out the unique values in the column of a csv file.
@@ -43,7 +47,7 @@ class TableFilter(object):
 
     def populate_df(self):
         try:
-            csv_file = self.__file1
+            csv_file = self.__file
             df = pd.DataFrame()
             pop_df = df.from_csv(csv_file)
         except IOError as e:
@@ -64,35 +68,33 @@ class TableFilter(object):
 
     """ Export to filtered DataFrame to CSV file. """
 
-    def export_to_CSV(self):
+    def export_to_CSV(self) -> object:
         fileDestination = self.__file_dest
         df = self.filter_uniq()
         df.to_csv(fileDestination)
-        """
-        if __main__ == __name__:
-        """
 
     # Process command-line arguments.
     if __name__ == '__main__':
-        # Init the example's logger theme
-        # logger.init()
-        # print
-        #version.BANNER
 
-        parser = argparse.ArgumentParser(add_help=True, description="Allows users to filter CSV file in a variety of ways.")
-        parser.add_argument('-f', action='store', dest = 'file', help='Store the name of the csv file you want converted')
-        parser.add_argument('-c', action='store', dest = 'column', help='Store the name of the column you want filtered.')
-        parser.add_argument('-d', action='store', dest = 'file_destination', default= str( os.getcwd() ) + "/filteredcsvfile.csv", help= "Store the name of the file you'd like the program to create")
+        """ Create commandline functionality and add a help command. """
+        parser = argparse.ArgumentParser( add_help=True, description="Allows users to filter CSV file in a variety of ways." )
+        parser.add_argument( '-f', action = 'store', dest = 'file', help='Store the name of the csv file you want converted' )
+        parser.add_argument( '-c', action = 'store', dest = 'column', help='Store the name of the column you want filtered.' )
+        parser.add_argument( '-d', action = 'store', dest = 'file_destination', default= str( os.getcwd() ) + "/filteredcsvfile.csv", help= "Store the name of the file you'd like the program to create" )
+        parser.add_argument( '-a', action = 'store', dest = 'compare', help = 'Use "gt" for greater than, "lt" for less than, or "eq" for equals')
 
         if len(sys.argv) <= 2:
             parser.print_help()
             sys.exit(1)
 
-        cmd_args = parser.parse_args()
-        file = cmd_args.file
-        duplicate_column_name = cmd_args.column
-        file_destination = cmd_args.file_destination
-        
+        args = parser.parse_args()
+        # file = cmd_args.file
+        # duplicate_column = cmd_args.column
+        # file_dest = cmd_args.file_destination
+
+        filter_object = TableFilter()
+        filter_object.export_to_CSV()
+
         """
         if file_destination is None:
             file_destination = os.getcwd() + "/filteredcsvfile.csv"
