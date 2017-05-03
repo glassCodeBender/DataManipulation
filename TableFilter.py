@@ -36,8 +36,10 @@ class TableFilter(object):
         self.__duplicate = duplicate_column_name
         self.__file_dest = file_destination
 
-    """ Description: Method filters out the unique values in the column of a csv file.
-        Return: DataFrame excluding the value """
+    """
+        Description: Method filters out the unique values in the column of a csv file.
+        Return: DataFrame excluding the value
+    """
 
     def populate_df(self):
         try:
@@ -48,9 +50,10 @@ class TableFilter(object):
             print("I/O error: The file did not import properly.")
         return pop_df
 
-    """ Create a column of boolean values 
-        Check to see if the previous value in the column is equal 
-        Return: DataFram"""
+        """        
+        Create a column of boolean values 
+        Check to see if the previous value in the column is equal
+        """
 
     def filter_uniq(self):
         dup = self.__duplicate
@@ -59,8 +62,7 @@ class TableFilter(object):
         filtered_df = pop_df[pop_df['Unique'] == False]
         return filtered_df
 
-    """ Export to filtered DataFrame to CSV file. 
-        Return: Void """
+    """ Export to filtered DataFrame to CSV file. """
 
     def export_to_CSV(self):
         fileDestination = self.__file_dest
@@ -70,13 +72,17 @@ class TableFilter(object):
         if __main__ == __name__:
         """
 
-    """ Process command-line arguments. """
+    # Process command-line arguments.
     if __name__ == '__main__':
-        
+        # Init the example's logger theme
+        # logger.init()
+        # print
+        #version.BANNER
+
         parser = argparse.ArgumentParser(add_help=True, description="Allows users to filter CSV file in a variety of ways.")
         parser.add_argument('-f', action='store', dest = 'file', help='Store the name of the csv file you want converted')
         parser.add_argument('-c', action='store', dest = 'column', help='Store the name of the column you want filtered.')
-        parser.add_argument('-d', action='store', dest = 'file_destination', help= "Store the name of the file you'd like the program to create")
+        parser.add_argument('-d', action='store', dest = 'file_destination', default= str( os.getcwd() ) + "filteredcsvfile.csv", help= "Store the name of the file you'd like the program to create")
 
         if len(sys.argv) <= 2:
             parser.print_help()
@@ -86,6 +92,8 @@ class TableFilter(object):
         file = cmd_args.file
         duplicate_column_name = cmd_args.column
         file_destination = cmd_args.file_destination
-
+        
+        """
         if file_destination is None:
             file_destination = os.getcwd() + "/filteredcsvfile.csv"
+        """
