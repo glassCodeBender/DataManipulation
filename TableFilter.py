@@ -4,10 +4,10 @@ lf# -*- coding: utf-8 -*-
 (#)Title: TableFilter.py
 (#)Version: 1.0
 
-Program Purpose: Program allows users to remove duplicates from a column. The actual purpose of the program was to
-remove duplicate rows from an excel file so that I could use the sample data in a database for a school project. Eventually
-I will allow the program to accept commandline arguments. Since it is a full program instead of a script, I need to use
-a different program than system.argv.
+Program Purpose: Program allows users to remove duplicates from a column in a csv file (or excel converted to csv). The actual purpose
+of the program was to remove duplicate rows from an excel file so that I could use the sample data in a database for a school project. 
+Eventually I will design the program to accept commandline arguments. However, since the current program is a full program instead of 
+a script, I need to use a program other than system.argv.
 
 Inputs:
 
