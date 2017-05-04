@@ -12,6 +12,7 @@ of the program was to remove duplicate rows from an excel file so that I could u
 Eventually I will design the program to accept commandline arguments. However, since the current program is a full program instead of 
 a script, I need to use a program other than system.argv.
 
+
 Inputs:
 
 __file1 : Accepts String filename. Currently accepts only csv files.
@@ -40,10 +41,8 @@ class TableFilter(object):
         # Adding extra functionality to program
         self.__compare = args.compare
 
-    """
-        Description: Method filters out the unique values in the column of a csv file.
-        Return: DataFrame excluding the value
-    """
+    """ Description: Method filters out the unique values in the column of a csv file.
+        Return: DataFrame excluding the value """
 
     def populate_df(self):
         try:
@@ -51,7 +50,7 @@ class TableFilter(object):
             df = pd.DataFrame()
             pop_df = df.from_csv(csv_file)
         except IOError as e:
-            print("I/O error: The file did not import properly.")
+            print( "I/O error: The file did not import properly." )
         return pop_df
 
         """        
@@ -77,11 +76,18 @@ class TableFilter(object):
     if __name__ == '__main__':
 
         """ Create commandline functionality and add a help command. """
-        parser = argparse.ArgumentParser( add_help=True, description="Allows users to filter CSV file in a variety of ways." )
-        parser.add_argument( '-f', action = 'store', dest = 'file', help='Store the name of the csv file you want converted' )
-        parser.add_argument( '-c', action = 'store', dest = 'column', help='Store the name of the column you want filtered.' )
-        parser.add_argument( '-d', action = 'store', dest = 'file_destination', default= str( os.getcwd() ) + "/filteredcsvfile.csv", help= "Store the name of the file you'd like the program to create" )
-        parser.add_argument( '-a', action = 'store', dest = 'compare', help = 'Use "gt" for greater than, "lt" for less than, or "eq" for equals')
+        parser = argparse.ArgumentParser( add_help = True, description = "Allows users to filter CSV file in a variety of ways." )
+
+        # NEED TO ADD PARSER GROUP CALLED 'Positional Arguments'
+        # parse.add_argument_group()
+        parser.add_argument( '-f', '--file', dest = 'store', dest = 'file', help='Store the name of the csv file you want converted' )
+        parser.add_argument( '-n', '--column', action = 'store', dest = 'column', help='Store the name of the column you want filtered.' )
+
+        # NEED TO ADD PARSER GROUP CALLED 'Optional Arguments'
+        # parser.add_argument_group()
+        parser.add_argument( '-d', '--dest', action = 'store', dest = 'file_destination', default= str( os.getcwd() ) + "/filteredcsvfile.csv", help = "Store the name of the file you'd like the program to create" )
+        parser.add_argument( '-c', '--compare', action = 'store', dest = 'compare', help = 'Use "gt" for greater than, "lt" for less than, or "eq" for equals')
+        parser.add_argument( '-v', '--verbose', action = 'store_true', help = 'Increase the verbosity of the command.')
 
         if len(sys.argv) <= 2:
             parser.print_help()
@@ -95,7 +101,11 @@ class TableFilter(object):
         filter_object = TableFilter()
         filter_object.export_to_CSV()
 
+        if args.verbose:
+            assert isinstance(args.dest)
+            print('Your csv file has been filtered and saved to %s' % args.dest)
+
+
         """
         if file_destination is None:
             file_destination = os.getcwd() + "/filteredcsvfile.csv"
-        """
