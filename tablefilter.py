@@ -4,19 +4,20 @@
 (#)Title: tablefilter.py
 (#)Version: 1.0
 
-WARNING: Currently the program does not work from the commandline. However, the main aspects of the program work. I already
+WARNING: The program does not currently work from the commandline. However, the main aspects of the program work. I already
 used them to filter out duplicate names from an excel document. Also, the --compare functionality has not been added yet.
 
-Program Purpose: Program allows users to remove duplicate values from a column in a csv file (or excel converted to csv). 
-The actual purpose of the program was to remove duplicate rows from an excel file so that I could use the sample data in 
-a database for a school project.
+Program Purpose: Program allows users to remove duplicate values from a column in a csv file (or from an Excel document 
+that was converted to a csv). The actual purpose of the program was to remove duplicate rows from an excel table so that 
+I could use the sample data in a database for a school project.
 
 Inputs:
-__file1 : Accepts String filename. Currently accepts only csv files.
+__file : Accepts String filename. Currently accepts only csv files.
 __duplicate_column : Accepts a String. User determines the name of the column to remove duplicate rows based on 
     - I used 'Customer Name' in my program to remove duplicate customers.
 __file_dest : Determines where the newly created csv file should save to. 
     - I need to rewrite the program so that it saves to the default working directory when I add commandline arguments.
+__compare : Allows the user to determine an operator (>, <, !=, =) that they want to use to filter a value. 
 
 This program will be periodically updated to include much more functionality.
 """
@@ -28,8 +29,8 @@ import sys
 
 class TableFilter(object):
 
-    def __init__(self, file = '', duplicate = '', file_destination = '', compare = '' ):
-        self.__file = file
+    def __init__(self, file18 = '', duplicate = '', file_destination = '', compare = '' ):
+        self.__file = file18
         self.__duplicate_column = duplicate
         self.__file_dest = file_destination
         # Adding extra functionality to program
