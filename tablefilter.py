@@ -36,7 +36,7 @@ class TableFilter(object):
         self.__compare = compare
 
     """ Description: Method filters out the unique values in the column of a csv file.
-        Return: DataFrame excluding the value """
+        Return: DataFrame excluding the duplicate values """
 
     def populate_df(self):
         try:
