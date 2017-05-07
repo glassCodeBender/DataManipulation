@@ -4,7 +4,7 @@
 (#)Title: tablefilter.py
 (#)Version: 1.0
 
-Message me if you want me to add any functionality to the program, if you'd like me to write a subclass of the program,
+Writer's Note: Message me if you want me to add any functionality to the program, if you'd like me to write a subclass of the program,
 or if you want to hire me for a job. I also know Scala and Java pretty well. 
 
 WARNING: The program does not currently work from the commandline. However, the main aspects of the program work. 
@@ -54,10 +54,8 @@ class TableFilter(object):
             print("I/O error: The file did not import properly.")
         return pop_df
 
-        """        
-        Create a column of boolean values 
-        Check to see if the previous value in the column is equal
-        """
+    """ Create a column of boolean values 
+        Check to see if the previous value in the column is equal """
 
     def filter_uniq(self):
         rm_duplicates = self.__rmdup
@@ -80,7 +78,7 @@ class TableFilter(object):
 
         # compare number values
         if isinstance(comparison_value, int) or isinstance(comparison_value, float):
-            if comparison_op == 'EQ' or comparison_op == 'NEQ' or comparison_op == 'LTE' or comparison_op == 'GTE' or comparison_op == 'LT' or comparison_op == 'GT':
+            if comparison_op == 'EQ' or comparison_op == 'NE' or comparison_op == 'LTE' or comparison_op == 'GTE' or comparison_op == 'LT' or comparison_op == 'GT':
                 if comparison_op == 'EQ':
                     df = pop_df[pop_df[column] == comparison_value]
                 elif comparison_op == 'NE':
@@ -96,7 +94,8 @@ class TableFilter(object):
                 else:
                     raise IOError(
                         "An exception was raised because you have deep psychological issues that affected your ability to use commandline tools.\n"
-                        "\n\tOnly 'EQ', 'NEQ', 'LTE', 'GTE', 'LT', or 'GT' can be used as operators.")
+                        "\n\tOnly 'EQ', 'NE', 'LTE', 'GTE', 'LT', or 'GT' can be used as operators.")
+
         # compare string values       
         if isinstance(comparison_value, str):
             if comparison_op == 'EQ':
@@ -136,6 +135,7 @@ class TableFilter(object):
                     raise IOError(
                         "An exception was raised because you have deep psychological issues that affected your ability to use commandline tools.\n"
                         "\n\tOnly 'EQ', 'NE', 'LTE', 'GTE', 'LT', or 'GT' can be used as operators.")
+
         # compare string values       
         if isinstance(comparison_value, str):
             if comparison_op == 'EQ':
@@ -145,7 +145,7 @@ class TableFilter(object):
             else:
                 raise IOError(
                     'An error occurred because you have deep psychological issues that affected your ability to use commandline tools.\n'
-                    '\n\tONLY "EQ" and "NEQ" operations can performed when comparing values that include letters.')
+                    '\n\tONLY "EQ" and "NE" operations can performed when comparing values that include letters.')
         return df
 
     """ Export to filtered DataFrame to CSV file. """
@@ -177,10 +177,10 @@ class TableFilter(object):
         if rm_dup and comp_op and comp_val and response == 'Y':
             df.to_csv(file_destination)
             df1.to_csv(file_destination + 'filtered')
-            
+
             print(
-            'You indicated that you both want to exclude duplicate values from a column and filter a column by a value. \n'
-            'We output the filtered column to ' + file_destination + 'filtered')
+                'You indicated that you both want to exclude duplicate values from a column and filter a column by a value. \n'
+                'We output the filtered column to ' + file_destination + 'filtered')
             sys.exit(0)
         else:
             df.to_csv(file_destination)
@@ -189,22 +189,22 @@ class TableFilter(object):
     if __name__ == '__main__':
 
         """ Add commandline help functionality to the program """
-        parser = argparse.ArgumentParser(add_help = True,
-                                         description = "Allows users to filter a CSV file in a variety of ways.")
+        parser = argparse.ArgumentParser( add_help = True,
+                                          description = "Allows users to filter a CSV file in a variety of ways.")
 
         # NEED TO ADD PARSER GROUP CALLED 'Positional Arguments'
         # parse.add_argument_group()
-        parser.add_argument('-f', '--file', action='store', dest = 'file',
+        parser.add_argument('-f', '--file', action = 'store', dest = 'file',
                             help = 'Store the name of the csv file you want converted')
-        parser.add_argument('-n', '--column', action='store', dest = 'column',
-                            help ='Store the name of the column you want filtered.')
-        parser.add_argument('-r', '--rmdup', action='store_true', dest = 'rmdup',
+        parser.add_argument('-n', '--column', action = 'store', dest = 'column',
+                            help = 'Store the name of the column you want filtered.')
+        parser.add_argument('-r', '--rm', action = 'store_true', dest = 'rm',
                             help = 'If -r is added to your command, the program will remove all duplicates of the value passed to --column.')
         # NEED TO ADD PARSER GROUP CALLED 'Optional Arguments'
         # parser.add_argument_group()
-        parser.add_argument('-d', '--dest', action='store', dest='file_destination',
+        parser.add_argument('-d', '--dest', action = 'store', dest = 'file_destination',
                             default = str(os.getcwd()) + "/filteredcsvfile.csv",
-                            help = "Store the name of the file you'd like the program to create")
+                            help="Store the name of the file you'd like the program to create")
         parser.add_argument('-c', '--compare', action = 'store', dest = 'compare',
                             help = 'Command allows user to filter a column based on an operator passed to -c and '
                                  'a value (String or Float) passed to -z. \n'
@@ -214,7 +214,7 @@ class TableFilter(object):
                                  '\n"lte" for less than or equal'
                                  '\n"gte" for greater than or equal to'
                                  '\n"eq" for equals')
-        parser.add_argument('-z', '--value', action='store', dest='comp_value',
+        parser.add_argument('-z', '--value', action = 'store', dest = 'comp_value',
                             help = 'Enter a value that you want to filter a column by. \n'
                                  'For example: The following command will filter out all rows where "Gross Sales" was less than 30'
                                  '\n~$ python tablefilter.py -f myfile.csv -n "Gross Sales" -c lt -z 30')
@@ -230,11 +230,11 @@ class TableFilter(object):
         file_dest = args.file_destination
         column = args.column
         compare = args.compare
-        rmdup = args.rmdup
+        rmduplicate = args.rm
 
         assert os.path.exists(str(os.getcwd()) + '/' + file)
 
-        filter_object = TableFilter(file, column, file_dest, compare, rmdup)
+        filter_object = TableFilter( file, column, file_dest, compare, rmduplicate )
         filter_object.export_to_CSV()
 
         if args.verbose:
