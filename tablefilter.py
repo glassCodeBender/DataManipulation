@@ -32,7 +32,7 @@ import os
 import sys
 
 class TableFilter(object):
-    
+
     def __init__(self, file18 = '', column_name = '', file_destination = '', comparison_op = '', comparison_value = '',
                  rm_duplicates = False):
         self.__file = file18
@@ -56,6 +56,7 @@ class TableFilter(object):
 
     """ Description: Filters rows in a 2D array to only include the first occurrence of a value in a given column
         Returns: DataFrame """
+
     def filter_uniq(self):
         rm_duplicates = self.__rmdup
         assert rm_duplicates
@@ -64,7 +65,7 @@ class TableFilter(object):
         pop_df = self.populate_df
         pop_df['Unique'] = (pop_df[dup] == pop_df[dup].shift())
         filtered_df = pop_df[pop_df['Unique'] == False]
-        filtered_df.drop( 'Unique', axis = 1, inplace = True )
+        filtered_df.drop('Unique', axis=1, inplace=True)
         return filtered_df
 
     """ Description: Allows users to filter a column based on a given value and an operator 
@@ -109,7 +110,7 @@ class TableFilter(object):
 
         # NEED TO ADD DATETIME functionality!!!!!!!!
         df = pop_df[pop_df['Result'] == True]
-        df.drop( 'Result', axis = 1, inplace = True )
+        df.drop('Result', axis=1, inplace=True)
         return df
 
     """ Description: Allows users to apply both filter unique columns out and filter by an operator
@@ -196,14 +197,16 @@ class TableFilter(object):
     if __name__ == '__main__':
 
         """ Add commandline help functionality to the program """
-        parser = argparse.ArgumentParser( add_help = True,
-                                          description = "Allows users to filter a CSV file in a variety of ways.")
+        parser = argparse.ArgumentParser(add_help = True,
+                                         description = 'Allows users to filter a CSV file in a variety of ways.\n'
+                                                       'Sample usage: '
+                                                       '\n\n\t~$ python tablefilter.py -f myfile.csv -n "Daily Sales" -d destination_file.csv -c gte -z 250')
 
         # NEED TO ADD PARSER GROUP CALLED 'Positional Arguments'
         # parse.add_argument_group()
         parser.add_argument('-f', '--file', action = 'store', dest = 'file',
                             help = 'Store the name of the csv file you want converted')
-        parser.add_argument('-n', '--column', action = 'store', dest = 'column',
+        parser.add_argument('-n', '--column', action = 'store', dest ='column',
                             help = 'Store the name of the column you want filtered.')
         parser.add_argument('-r', '--rm', action = 'store_true', dest = 'rm',
                             help = 'If -r is added to your command, the program will remove all duplicates of the value passed to --column.')
@@ -211,7 +214,7 @@ class TableFilter(object):
         # parser.add_argument_group()
         parser.add_argument('-d', '--dest', action = 'store', dest = 'file_destination',
                             default = str(os.getcwd()) + "/filteredcsvfile.csv",
-                            help="Store the name of the file you'd like the program to create")
+                            help = "Store the name of the file you'd like the program to create")
         parser.add_argument('-c', '--compare', action = 'store', dest = 'compare',
                             help = 'Command allows user to filter a column based on an operator passed to -c and '
                                  'a value (String or Float) passed to -z. \n'
@@ -241,7 +244,7 @@ class TableFilter(object):
 
         assert os.path.exists(str(os.getcwd()) + '/' + file)
 
-        filter_object = TableFilter( file, column, file_dest, compare, rmduplicate )
+        filter_object = TableFilter(file, column, file_dest, compare, rmduplicate)
         filter_object.export_to_CSV()
 
         if args.verbose:
