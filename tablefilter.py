@@ -55,7 +55,7 @@ class TableFilter(object):
         """
 
     def filter_uniq(self):
-        dup = self.__duplicate
+        dup = self.__duplicate_column
         pop_df = self.populate_df
         pop_df['Unique'] = (pop_df[dup] == pop_df[dup].shift())
         filtered_df = pop_df[pop_df['Unique'] == False]
