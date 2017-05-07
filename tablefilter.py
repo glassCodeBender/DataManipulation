@@ -80,17 +80,17 @@ class TableFilter(object):
         if isinstance(comparison_value, int) or isinstance(comparison_value, float):
             if comparison_op == 'EQ' or comparison_op == 'NE' or comparison_op == 'LTE' or comparison_op == 'GTE' or comparison_op == 'LT' or comparison_op == 'GT':
                 if comparison_op == 'EQ':
-                    pop_df['Result'] = pop_df[pop_df[column] == comparison_value]
+                    pop_df['Result'] = (pop_df[column] == comparison_value)
                 elif comparison_op == 'NE':
-                    pop_df['Result'] = pop_df[pop_df[column] != comparison_value]
+                    pop_df['Result'] = (pop_df[column] != comparison_value)
                 elif comparison_op == 'LTE':
-                    pop_df['Result'] = pop_df[pop_df[column] <= comparison_value]
+                    pop_df['Result'] = (pop_df[column] <= comparison_value)
                 elif comparison_op == 'GTE':
-                    pop_df['Result'] = pop_df[pop_df[column] >= comparison_value]
+                    pop_df['Result'] = (pop_df[column] >= comparison_value)
                 elif comparison_op == 'LT':
-                    pop_df['Result'] = pop_df[pop_df[column] < comparison_value]
+                    pop_df['Result'] = (pop_df[column] < comparison_value)
                 elif comparison_op == 'GT':
-                    pop_df['Result'] = pop_df[pop_df[column] > comparison_value]
+                    pop_df['Result'] = (pop_df[column] > comparison_value)
                 else:
                     raise IOError(
                         "An exception was raised because you have deep psychological issues that affected your ability to use commandline tools.\n"
@@ -99,9 +99,9 @@ class TableFilter(object):
         # compare string values
         if isinstance(comparison_value, str):
             if comparison_op == 'EQ':
-                pop_df['Result'] = pop_df[pop_df[column].upper() == comparison_value.upper()]
+                pop_df['Result'] = (pop_df[column] == comparison_value)
             elif comparison_op == 'NE':
-                pop_df['Result'] = pop_df[pop_df[column].upper() == comparison_value.upper()]
+                pop_df['Result'] = (pop_df[column] != comparison_value)
             else:
                 raise IOError(
                     'An error occurred because you have deep psychological issues that affected your ability to use commandline tools.\n'
@@ -122,17 +122,17 @@ class TableFilter(object):
         if isinstance(comparison_value, int) or isinstance(comparison_value, float):
             if comparison_op == 'EQ' or comparison_op == 'NE' or comparison_op == 'LTE' or comparison_op == 'GTE' or comparison_op == 'LT' or comparison_op == 'GT':
                 if comparison_op == 'EQ':
-                    pop_df['Result'] = pop_df[pop_df[column] == comparison_value]
+                    pop_df['Result'] = (pop_df[column] == comparison_value)
                 elif comparison_op == 'NE':
-                    pop_df['Result'] = pop_df[pop_df[column] != comparison_value]
+                    pop_df['Result'] = (pop_df[column] != comparison_value)
                 elif comparison_op == 'LTE':
-                    pop_df['Result'] = pop_df[pop_df[column] <= comparison_value]
+                    pop_df['Result'] = (pop_df[column] <= comparison_value)
                 elif comparison_op == 'GTE':
-                    pop_df['Result'] = pop_df[pop_df[column] >= comparison_value]
+                    pop_df['Result'] = (pop_df[column] >= comparison_value)
                 elif comparison_op == 'LT':
-                    pop_df['Result'] = pop_df[pop_df[column] < comparison_value]
+                    pop_df['Result'] = (pop_df[column] < comparison_value)
                 elif comparison_op == 'GT':
-                    pop_df['Result'] = pop_df[pop_df[column] > comparison_value]
+                    pop_df['Result'] = (pop_df[column] > comparison_value)
                 else:
                     raise IOError(
                         "An exception was raised because you have deep psychological issues that affected your ability to use commandline tools.\n"
@@ -141,13 +141,13 @@ class TableFilter(object):
         # compare string values
         if isinstance(comparison_value, str):
             if comparison_op == 'EQ':
-                pop_df['Result'] = pop_df[pop_df[column].upper() == comparison_value.upper()]
+                pop_df['Result'] = (pop_df[column] == comparison_value)
             elif comparison_op == 'NE':
-                pop_df['Result'] = pop_df[pop_df[column].upper() == comparison_value.upper()]
+                pop_df['Result'] = (pop_df[column] != comparison_value)
             else:
                 raise IOError(
                     'An error occurred because you have deep psychological issues that affected your ability to use commandline tools.\n'
-                    '\n\tONLY "EQ" and "NEQ" operations can performed when comparing values that include letters.')
+                    '\n\tONLY "EQ" and "NE" operations can performed when comparing values that include letters.')
 
         # NEED TO ADD DATETIME functionality!!!!!!!!
         df = pop_df[pop_df['Result'] == True]
