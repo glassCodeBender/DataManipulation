@@ -4,7 +4,8 @@
 (#)Title: tablefilter.py
 (#)Version: 1.0
 
-Message me if you want me to add any functionality to the program or if you want to hire me for a job. 
+Message me if you want me to add any functionality to the program, if you'd like me to write a subclass of the program,
+or if you want to hire me for a job. I also know Scala and Java pretty well. 
 
 WARNING: The program does not currently work from the commandline. However, the main aspects of the program work. I already
 used them to filter out duplicate names from an excel document. Also, the --compare functionality has not been added yet.
@@ -36,7 +37,6 @@ class TableFilter(object):
         self.__file = file18
         self.__column = column_name
         self.__file_dest = file_destination
-        # Adding extra functionality to program
         self.__compare = comparison_op
         self.__comp_value = comparison_value
         self.__rmdup = rm_duplicates
