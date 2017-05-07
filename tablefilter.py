@@ -53,8 +53,8 @@ class TableFilter(object):
             print("I/O error: The file did not import properly.")
         return pop_df
 
-    """ Create a column of boolean values 
-        Check to see if the previous value in the column is equal """
+    """ Description: Filters rows in a 2D array to only include the first occurrence of a value in a given column
+        Returns: DataFrame """
 
     def filter_uniq(self):
         rm_duplicates = self.__rmdup
@@ -66,7 +66,7 @@ class TableFilter(object):
         filtered_df = pop_df[pop_df['Unique'] == False]
         return filtered_df
 
-    """ Allows users to filter a column based on a given value and an operator 
+    """ Description: Allows users to filter a column based on a given value and an operator 
         Returns: DataFrame with filtered content. """
 
     def filter_by(self):
@@ -196,7 +196,7 @@ class TableFilter(object):
         """ Add commandline help functionality to the program """
         parser = argparse.ArgumentParser( add_help = True,
                                           description = "Allows users to filter a CSV file in a variety of ways.")
-        
+
         # NEED TO ADD PARSER GROUP CALLED 'Positional Arguments'
         # parse.add_argument_group()
         parser.add_argument('-f', '--file', action = 'store', dest = 'file',
