@@ -1,25 +1,23 @@
 # -*- coding: utf-8 -*-
 """
 (@)Author: glassCodeBender
-(#)Title: tablefilter.py
+(#)Title: TableFilter.py
 (#)Version: 1.0
 
 WARNING: Currently the program does not work from the commandline. However, the main aspects of the program work. I already
-used them to filter out duplicate names from an excel document. I also have not added functionality to filter columns with 
-Boolean expressions yet. 
+used them to filter out duplicate names from an excel document.
 
-Program Purpose: Program allows users to remove duplicates from a column in a csv file (or excel converted to csv). The actual purpose
-of the program was to remove duplicate rows from an excel file so that I could use the sample data in a database for a school project. 
-Eventually I will design the program to accept commandline arguments. However, since the current program is a full program instead of 
-a script, I need to use a program other than system.argv.
+Program Purpose: Program allows users to remove duplicate values from a column in a csv file (or excel converted to csv). 
+The actual purpose of the program was to remove duplicate rows from an excel file so that I could use the sample data in 
+a database for a school project.
 
 Inputs:
 __file1 : Accepts String filename. Currently accepts only csv files.
-__duplicate : Accepts a String. User determines the name of the column to remove duplicate rows based on 
+__duplicate_column : Accepts a String. User determines the name of the column to remove duplicate rows based on 
     - I used 'Customer Name' in my program to remove duplicate customers.
-__file_destination : Determines where the newly created csv file should save to. 
+__file_dest : Determines where the newly created csv file should save to. 
     - I need to rewrite the program so that it saves to the default working directory when I add commandline arguments.
-NEED TO ADD __main__ == __name__ and help functionality. 
+
 This program will be periodically updated to include much more functionality.
 """
 
@@ -30,10 +28,10 @@ import sys
 
 class TableFilter(object):
 
-    def __init__(self, file = '', duplicate = '', file_dest = '', compare = '' ):
+    def __init__(self, file = '', duplicate = '', file_destination = '', compare = '' ):
         self.__file = file
         self.__duplicate_column = duplicate
-        self.__file_dest = file_dest
+        self.__file_dest = file_destination
         # Adding extra functionality to program
         self.__compare = compare
 
@@ -94,13 +92,14 @@ class TableFilter(object):
         # duplicate_column = cmd_args.column
         # file_dest = cmd_args.file_destination
 
+        assert os.path.exists(args.file)
+
         filter_object = TableFilter(args.file, args.column, args.dest, args.compare)
         filter_object.export_to_CSV()
 
         if args.verbose:
             assert isinstance(args.dest)
             print('Your csv file has been filtered and saved to %s' % args.dest)
-
 
         """
         if file_destination is None:
