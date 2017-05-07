@@ -141,16 +141,18 @@ class TableFilter(object):
                         "\n\tOnly 'EQ', 'NE', 'LTE', 'GTE', 'LT', or 'GT' can be used as operators.")
 
         # compare string values
-        if isinstance(comparison_value, str):
+        elif isinstance(comparison_value, str) and isinstance(pop_df[column], str):
             if comparison_op == 'EQ':
-                pop_df['Result'] = (pop_df[column] == comparison_value)
+                pop_df['Result'] = (pop_df[column].upper() == comparison_value.upper())
             elif comparison_op == 'NE':
-                pop_df['Result'] = (pop_df[column] != comparison_value)
+                pop_df['Result'] = (pop_df[column].upper() != comparison_value.upper())
             else:
                 raise IOError(
                     'An error occurred because you have deep psychological issues that affected your ability to use commandline tools.\n'
                     '\n\tONLY "EQ" and "NE" operations can performed when comparing values that include letters.')
-
+        else:
+            raise NameError("Something went wrong when attempting to compare the value you entered and the values in the column. "
+                            "\nColumns made up of numbers can only be compared to numbers and columns made up of words can only be compared to words.")
         # NEED TO ADD DATETIME functionality!!!!!!!!
         df = pop_df[pop_df['Result'] == True]
         df.drop('Result', axis = 1, inplace = True)
