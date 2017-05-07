@@ -4,6 +4,8 @@
 (#)Title: tablefilter.py
 (#)Version: 1.0
 
+Message me if you want me to add any functionality to the program or if you want to hire me for a job. 
+
 WARNING: The program does not currently work from the commandline. However, the main aspects of the program work. I already
 used them to filter out duplicate names from an excel document. Also, the --compare functionality has not been added yet.
 
@@ -18,6 +20,7 @@ __duplicate_column : Accepts a String. User determines the name of the column to
 __file_dest : Determines where the newly created csv file should save to. 
     - I need to rewrite the program so that it saves to the default working directory when I add commandline arguments.
 __compare : Allows the user to determine an operator (>, <, !=, =) that they want to use to filter a value. 
+__comp_value : Accepts a String, Float, or Integer that the user wants to filter a column compared to.
 
 This program will be periodically updated to include much more functionality.
 """
@@ -29,12 +32,13 @@ import sys
 
 class TableFilter(object):
 
-    def __init__(self, file18 = '', duplicate = '', file_destination = '', comparison_op = '' ):
+    def __init__(self, file18 = '', duplicate = '', file_destination = '', comparison_op = '', comparison_value = '' ):
         self.__file = file18
         self.__duplicate_column = duplicate
         self.__file_dest = file_destination
         # Adding extra functionality to program
-        self.__compare = comparison_op 
+        self.__compare = comparison_op
+        self.__comp_value = comparison_value
 
     """ Description: Method filters out the unique values in the column of a csv file.
         Return: DataFrame excluding the duplicate values """
@@ -62,10 +66,10 @@ class TableFilter(object):
 
     """ Export to filtered DataFrame to CSV file. """
 
-    def export_to_CSV(self) -> object:
+    def export_to_CSV(self):
         fileDestination = self.__file_dest
         df = self.filter_uniq()
-        df.to_csv(fileDestination)
+        df.to_csv( fileDestination )
 
     # Process command-line arguments.
     if __name__ == '__main__':
@@ -80,9 +84,19 @@ class TableFilter(object):
 
         # NEED TO ADD PARSER GROUP CALLED 'Optional Arguments'
         # parser.add_argument_group()
-        parser.add_argument( '-d', '--dest', action = 'store', dest = 'file_destination', default= str( os.getcwd() ) + "/filteredcsvfile.csv", help = "Store the name of the file you'd like the program to create" )
-        parser.add_argument( '-c', '--compare', action = 'store', dest = 'compare', help = 'Use "gt" for greater than, "lt" for less than, or "eq" for equals')
-        parser.add_argument( '-v', '--verbose', action = 'store_true', help = 'Increase the verbosity of the program.')
+        parser.add_argument( '-d', '--dest', action = 'store', dest = 'file_destination', default= str( os.getcwd() ) + "/filteredcsvfile.csv", 
+                                                                                          help = "Store the name of the file you'd like the program to create" )
+        parser.add_argument( '-c', '--compare', action = 'store', dest = 'compare', help = 'Command allows user to filter a column based on an operator passed to -c and '
+                                                                                           'a value (String or Float) passed to -z. \n'
+                                                                                           'Accepted Values: \n\t"gt" for greater than, '
+                                                                                           '\n\t"lt" for less than, '
+                                                                                           '\n\t"ne" for not equal" '
+                                                                                            '\n\t"lte" for less than or equal'
+                                                                                           '\n\t"gte" for greater than or equal to'
+                                                                                            '\n\t "eq" for equals' )
+        parser.add_argument('-z', '--filter', action='store', dest='filter', help='Accepts a value to filter a column by.  '
+                                                                                  'Currently only integer, float and strings are accepted' )
+        parser.add_argument( '-v', '--verbose', action = 'store_true', help = 'Increase the verbosity of the program.' )
 
         if len(sys.argv) <= 2:
             parser.print_help()
@@ -93,14 +107,14 @@ class TableFilter(object):
         # duplicate_column = cmd_args.column
         # file_dest = cmd_args.file_destination
 
-        assert os.path.exists( str(os.getcwd()) + '/' + args.file)
+        assert os.path.exists( str(os.getcwd()) + '/' + args.file )
 
-        filter_object = TableFilter(args.file, args.column, args.dest, args.compare)
+        filter_object = TableFilter( args.file, args.column, args.dest, args.compare, args.filter )
         filter_object.export_to_CSV()
 
         if args.verbose:
-            assert isinstance(args.dest)
-            print('Your csv file has been filtered and saved to %s' % args.dest)
+            assert isinstance( args.dest )
+            print( 'Your csv file has been filtered and saved to %s' % args.dest )
 
         """
         if file_destination is None:
