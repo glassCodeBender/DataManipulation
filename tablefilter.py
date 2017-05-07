@@ -203,8 +203,8 @@ class TableFilter(object):
         """ Add commandline help functionality to the program """
         parser = argparse.ArgumentParser(add_help = True,
                                          description = 'Allows users to filter a CSV file in a variety of ways.\n'
-                                                       'Sample usage: '
-                                                       '\n\n\t~$ python tablefilter.py -f myfile.csv -n "Daily Sales" -d destination_file.csv -c gte -z 250')
+                                                       '\nSample usage: '
+                                                       '\n~$ python tablefilter.py -f myfile.csv -n "Daily Sales" -d destination_file.csv -c gte -z 250')
 
         # NEED TO ADD PARSER GROUP CALLED 'Positional Arguments'
         # parse.add_argument_group()
