@@ -4,7 +4,7 @@
 (#)Title: tablefilter.py
 (#)Version: 1.0
 
-Message me if you want me to add any functionality to the program or if you'd like to hire me for a job. 
+Message me if you want me to add any functionality to the program or if you want to hire me for a job. 
 
 WARNING: The program does not currently work from the commandline. However, the main aspects of the program work. I already
 used them to filter out duplicate names from an excel document. Also, the --compare functionality has not been added yet.
@@ -71,7 +71,42 @@ class TableFilter(object):
         df = self.filter_uniq()
         df.to_csv( fileDestination )
 
-    # Process command-line arguments.
+    """ Allows users to filter a column based on a given value and an operator """
+    def filter_by(self):
+        comparison_op = self.__compare.upper()
+        comparison_value = self.__comp_value
+
+        if isinstance(comparison_value, int) or isinstance(comparison_value, float):
+            if comparison_op == 'EQ' or comparison_op == 'NEQ' or comparison_op == 'LTE' or comparison_op == 'GTE' or comparison_op == 'LT' or comparison_op == 'GT':
+                if comparison_op == 'EQ':
+                    # do this
+                elif comparison_op == 'NEQ':
+                    # do this
+                elif comparison_op == 'LTE':
+                    # do this
+                elif comparison_op == 'GTE':
+                    # do this
+                elif comparison_op == 'LT':
+                    # do this
+                elif comparison_op == 'GT':
+                    # do this
+                else:
+                    raise IOError("An exception was raised because you have deep psychological issues that affected your ability to use commandline tools.\n"
+                                  "\n\tOnly 'EQ', 'NEQ', 'LTE', 'GTE', 'LT', or 'GT' can be used as operators.")
+                    
+        if isinstance(comparison_value, str):
+            if comparison_op == 'EQ':
+                # do this
+            elif comparison_op == 'NEQ':
+                # do this
+            else:
+                raise IOError(
+                    'An error occurred because you have deep psychological issues that affected your ability to use commandline tools.\n'
+                    '\n\tONLY "EQ" and "NEQ" operations can performed on values that include letters.')
+        
+        # NEED TO ADD DATETIME functionality!!!!!!!!        
+
+    """ Process command-line arguments. """
     if __name__ == '__main__':
 
         """ Create commandline functionality to the program """
@@ -84,7 +119,7 @@ class TableFilter(object):
 
         # NEED TO ADD PARSER GROUP CALLED 'Optional Arguments'
         # parser.add_argument_group()
-        parser.add_argument( '-d', '--dest', action = 'store', dest = 'file_destination', default= str( os.getcwd() ) + "/filteredcsvfile.csv", 
+        parser.add_argument( '-d', '--dest', action = 'store', dest = 'file_destination', default= str( os.getcwd() ) + "/filteredcsvfile.csv",
                                                                                           help = "Store the name of the file you'd like the program to create" )
         parser.add_argument( '-c', '--compare', action = 'store', dest = 'compare', help = 'Command allows user to filter a column based on an operator passed to -c and '
                                                                                            'a value (String or Float) passed to -z. \n'
@@ -103,13 +138,16 @@ class TableFilter(object):
             sys.exit(1)
 
         args = parser.parse_args()
-        # file = cmd_args.file
-        # duplicate_column = cmd_args.column
-        # file_dest = cmd_args.file_destination
+        file = args.file
+        duplicate_column = args.column
+        file_dest = args.file_destination
+        column = args.column
+        filter = args.filter
+        
 
-        assert os.path.exists( str(os.getcwd()) + '/' + args.file )
+        assert os.path.exists( str(os.getcwd()) + '/' + file )
 
-        filter_object = TableFilter( args.file, args.column, args.dest, args.compare, args.filter )
+        filter_object = TableFilter( file, column, dest, compare, filter )
         filter_object.export_to_CSV()
 
         if args.verbose:
@@ -119,3 +157,4 @@ class TableFilter(object):
         """
         if file_destination is None:
             file_destination = os.getcwd() + "/filteredcsvfile.csv"
+            """
