@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 (@)Author: glassCodeBender
-(#)Title: TableFilter.py
+(#)Title: tablefilter.py
 (#)Version: 1.0
 
 WARNING: Currently the program does not work from the commandline. However, the main aspects of the program work. I already
