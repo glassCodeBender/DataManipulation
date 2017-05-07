@@ -69,7 +69,7 @@ class TableFilter(object):
     # Process command-line arguments.
     if __name__ == '__main__':
 
-        """ Create commandline functionality and add a help command. """
+        """ Create commandline functionality to the program """
         parser = argparse.ArgumentParser( add_help = True, description = "Allows users to filter CSV file in a variety of ways." )
 
         # NEED TO ADD PARSER GROUP CALLED 'Positional Arguments'
@@ -92,7 +92,7 @@ class TableFilter(object):
         # duplicate_column = cmd_args.column
         # file_dest = cmd_args.file_destination
 
-        assert os.path.exists(args.file)
+        assert os.path.exists( str(os.getcwd()) + '/' + args.file)
 
         filter_object = TableFilter(args.file, args.column, args.dest, args.compare)
         filter_object.export_to_CSV()
