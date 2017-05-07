@@ -63,9 +63,9 @@ class TableFilter(object):
 
         dup = self.__column
         pop_df = self.populate_df
-        pop_df['Unique'] = (pop_df[dup] == pop_df[dup].shift())
+        pop_df['Unique'] = ( pop_df[dup] == pop_df[dup].shift() )
         filtered_df = pop_df[pop_df['Unique'] == False]
-        filtered_df.drop('Unique', axis=1, inplace=True)
+        filtered_df.drop( 'Unique', axis = 1, inplace = True )
         return filtered_df
 
     """ Description: Allows users to filter a column based on a given value and an operator 
@@ -110,7 +110,7 @@ class TableFilter(object):
 
         # NEED TO ADD DATETIME functionality!!!!!!!!
         df = pop_df[pop_df['Result'] == True]
-        df.drop('Result', axis=1, inplace=True)
+        df.drop( 'Result', axis = 1, inplace = True )
         return df
 
     """ Description: Allows users to apply both filter unique columns out and filter by an operator
@@ -153,6 +153,7 @@ class TableFilter(object):
 
         # NEED TO ADD DATETIME functionality!!!!!!!!
         df = pop_df[pop_df['Result'] == True]
+        df.drop('Result', axis = 1, inplace = True)
         return df
 
     """ Description: Export to filtered DataFrame to CSV file. 
@@ -242,7 +243,7 @@ class TableFilter(object):
         compare = args.compare
         rmduplicate = args.rm
 
-        assert os.path.exists(str(os.getcwd()) + '/' + file)
+        assert os.path.exists( str(os.getcwd()) + '/' + file )
 
         filter_object = TableFilter(file, column, file_dest, compare, rmduplicate)
         filter_object.export_to_CSV()
