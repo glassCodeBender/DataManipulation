@@ -4,12 +4,12 @@
 (#)Title: tablefilter.py
 (#)Version: 1.0
 
-Writer's Note: Message me if you want me to add any functionality to the program, if you'd like me to write a subclass of the program,
-or if you want to hire me for a job. I also know Scala and Java pretty well. 
+Writer's Note: Message me if you want me to add any functionality to the program, if you'd like me to write a subclass 
+of the program or if you want to hire me for a job. I also know Scala and Java pretty well. I wrote the tablefilter.py
+in less than 2 days and I wrote the core components of the program (filter_unique() in less than 45 minutes.
 
-WARNING: The program does not currently work from the commandline. However, the main aspects of the program work. 
-I already used them to filter out duplicate names from an excel document. Also, the --compare functionality has 
-not been added yet.
+WARNING: This program is a work in progress, but the main aspects of the program should work. I already used the 
+program logic to filter out duplicate names from an excel document in iPython. 
 
 Program Purpose: Program allows users to remove duplicate values from a column in a csv file (or from an Excel document 
 that was converted to a csv). The actual purpose of the program was to remove duplicate rows from an excel table so that 
@@ -24,7 +24,6 @@ __file_dest : Determines where the newly created csv file should save to.
 __compare : Allows the user to determine an operator (>, <, !=, =) that they want to use to filter a value. 
 __comp_value : Accepts a String, Float, or Integer that the user wants to filter a column compared to.
 
-This program will be periodically updated to include much more functionality.
 """
 
 import pandas as pd
@@ -111,7 +110,7 @@ class TableFilter(object):
         df = pop_df[pop_df['Result'] == True]
         return df
 
-    """ Allows users to apply both filter unique columns out and filter by an operator
+    """ Description: Allows users to apply both filter unique columns out and filter by an operator
         Returns: DataFrame """
 
     def unique_and_filter(self):
@@ -153,7 +152,8 @@ class TableFilter(object):
         df = pop_df[pop_df['Result'] == True]
         return df
 
-    """ Export to filtered DataFrame to CSV file. """
+    """ Description: Export to filtered DataFrame to CSV file. 
+        Return: Void """
 
     def export_to_CSV(self):
         file_destination = self.__file_dest
@@ -196,7 +196,7 @@ class TableFilter(object):
         """ Add commandline help functionality to the program """
         parser = argparse.ArgumentParser( add_help = True,
                                           description = "Allows users to filter a CSV file in a variety of ways.")
-
+        
         # NEED TO ADD PARSER GROUP CALLED 'Positional Arguments'
         # parse.add_argument_group()
         parser.add_argument('-f', '--file', action = 'store', dest = 'file',
