@@ -32,8 +32,9 @@ import os
 import sys
 
 class TableFilter(object):
-    def __init__(self, file18='', column_name='', file_destination='', comparison_op='', comparison_value='',
-                 rm_duplicates=False):
+    
+    def __init__(self, file18 = '', column_name = '', file_destination = '', comparison_op = '', comparison_value = '',
+                 rm_duplicates = False):
         self.__file = file18
         self.__column = column_name
         self.__file_dest = file_destination
