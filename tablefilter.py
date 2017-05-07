@@ -4,7 +4,7 @@
 (#)Title: tablefilter.py
 (#)Version: 1.0
 
-Writer's Note: Message me if you want me to add any functionality to the program, if you'd like me to write a subclass,
+Writer's Note: Message me if you want me to add any functionality to the program, if you'd like me to write a subclass of the program,
 or if you want to hire me for a job. I also know Scala and Java pretty well. 
 
 WARNING: The program does not currently work from the commandline. However, the main aspects of the program work. 
@@ -80,34 +80,35 @@ class TableFilter(object):
         if isinstance(comparison_value, int) or isinstance(comparison_value, float):
             if comparison_op == 'EQ' or comparison_op == 'NE' or comparison_op == 'LTE' or comparison_op == 'GTE' or comparison_op == 'LT' or comparison_op == 'GT':
                 if comparison_op == 'EQ':
-                    df = pop_df[pop_df[column] == comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] == comparison_value]
                 elif comparison_op == 'NE':
-                    df = pop_df[pop_df[column] != comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] != comparison_value]
                 elif comparison_op == 'LTE':
-                    df = pop_df[pop_df[column] <= comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] <= comparison_value]
                 elif comparison_op == 'GTE':
-                    df = pop_df[pop_df[column] >= comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] >= comparison_value]
                 elif comparison_op == 'LT':
-                    df = pop_df[pop_df[column] < comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] < comparison_value]
                 elif comparison_op == 'GT':
-                    df = pop_df[pop_df[column] > comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] > comparison_value]
                 else:
                     raise IOError(
                         "An exception was raised because you have deep psychological issues that affected your ability to use commandline tools.\n"
                         "\n\tOnly 'EQ', 'NE', 'LTE', 'GTE', 'LT', or 'GT' can be used as operators.")
 
-        # compare string values       
+        # compare string values
         if isinstance(comparison_value, str):
             if comparison_op == 'EQ':
-                df = pop_df[pop_df[column].upper() == comparison_value.upper()]
+                pop_df['Result'] = pop_df[pop_df[column].upper() == comparison_value.upper()]
             elif comparison_op == 'NE':
-                df = pop_df[pop_df[column].upper() == comparison_value.upper()]
+                pop_df['Result'] = pop_df[pop_df[column].upper() == comparison_value.upper()]
             else:
                 raise IOError(
                     'An error occurred because you have deep psychological issues that affected your ability to use commandline tools.\n'
                     '\n\tONLY "EQ" and "NEQ" operations can performed when comparing values that include letters.')
 
         # NEED TO ADD DATETIME functionality!!!!!!!!
+        df = pop_df[pop_df['Result'] == True]
         return df
 
     """ Allows users to apply both filter unique columns out and filter by an operator
@@ -117,35 +118,39 @@ class TableFilter(object):
         comparison_op, comparison_value, rm_dup, column = self.__compare, self.__comp_value, self.__rmdup, self.__column
         pop_df = self.filter_uniq()
 
+        # compare number values
         if isinstance(comparison_value, int) or isinstance(comparison_value, float):
             if comparison_op == 'EQ' or comparison_op == 'NE' or comparison_op == 'LTE' or comparison_op == 'GTE' or comparison_op == 'LT' or comparison_op == 'GT':
                 if comparison_op == 'EQ':
-                    df = pop_df[pop_df[column] == comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] == comparison_value]
                 elif comparison_op == 'NE':
-                    df = pop_df[pop_df[column] != comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] != comparison_value]
                 elif comparison_op == 'LTE':
-                    df = pop_df[pop_df[column] <= comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] <= comparison_value]
                 elif comparison_op == 'GTE':
-                    df = pop_df[pop_df[column] >= comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] >= comparison_value]
                 elif comparison_op == 'LT':
-                    df = pop_df[pop_df[column] < comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] < comparison_value]
                 elif comparison_op == 'GT':
-                    df = pop_df[pop_df[column] > comparison_value]
+                    pop_df['Result'] = pop_df[pop_df[column] > comparison_value]
                 else:
                     raise IOError(
                         "An exception was raised because you have deep psychological issues that affected your ability to use commandline tools.\n"
                         "\n\tOnly 'EQ', 'NE', 'LTE', 'GTE', 'LT', or 'GT' can be used as operators.")
 
-        # compare string values       
+        # compare string values
         if isinstance(comparison_value, str):
             if comparison_op == 'EQ':
-                df = pop_df[pop_df[column].upper() == comparison_value.upper()]
+                pop_df['Result'] = pop_df[pop_df[column].upper() == comparison_value.upper()]
             elif comparison_op == 'NE':
-                df = pop_df[pop_df[column].upper() == comparison_value.upper()]
+                pop_df['Result'] = pop_df[pop_df[column].upper() == comparison_value.upper()]
             else:
                 raise IOError(
                     'An error occurred because you have deep psychological issues that affected your ability to use commandline tools.\n'
-                    '\n\tONLY "EQ" and "NE" operations can performed when comparing values that include letters.')
+                    '\n\tONLY "EQ" and "NEQ" operations can performed when comparing values that include letters.')
+
+        # NEED TO ADD DATETIME functionality!!!!!!!!
+        df = pop_df[pop_df['Result'] == True]
         return df
 
     """ Export to filtered DataFrame to CSV file. """
