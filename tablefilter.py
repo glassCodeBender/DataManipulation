@@ -96,6 +96,7 @@ class TableFilter(object):
                     raise IOError(
                         "An exception was raised because you have deep psychological issues that affected your ability to use commandline tools.\n"
                         "\n\tOnly 'EQ', 'NE', 'LTE', 'GTE', 'LT', or 'GT' can be used as operators.")
+
         # compare string values
         elif isinstance(comparison_value, str) and isinstance(pop_df[column], str):
             if comparison_op == 'EQ':
@@ -141,6 +142,7 @@ class TableFilter(object):
                     raise IOError(
                         "An exception was raised because you have deep psychological issues that affected your ability to use commandline tools.\n"
                         "\n\tOnly 'EQ', 'NE', 'LTE', 'GTE', 'LT', or 'GT' can be used as operators.")
+
         # compare string values
         elif isinstance(comparison_value, str) and isinstance(pop_df[column], str):
             if comparison_op == 'EQ':
@@ -203,8 +205,8 @@ class TableFilter(object):
         """ Add commandline help functionality to the program """
         parser = argparse.ArgumentParser(add_help = True,
                                          description = 'Allows users to filter a CSV file in a variety of ways.\n'
-                                                       '\nSample usage: '
-                                                       '\n~$ python tablefilter.py -f myfile.csv -n "Daily Sales" -d destination_file.csv -c gte -z 250')
+                                                       'Sample usage: '
+                                                       '\n\n\t~$ python tablefilter.py -f myfile.csv -n "Daily Sales" -d destination_file.csv -c gte -z 250')
 
         # NEED TO ADD PARSER GROUP CALLED 'Positional Arguments'
         # parse.add_argument_group()
