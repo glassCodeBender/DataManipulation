@@ -67,7 +67,6 @@ class TableFilter(object):
         filtered_df = pop_df[pop_df['Unique'] == False]
         return filtered_df
 
-
     """ Allows users to filter a column based on a given value and an operator 
         Returns: DataFrame with filtered content. """
 
@@ -82,7 +81,7 @@ class TableFilter(object):
             if comparison_op == 'EQ' or comparison_op == 'NEQ' or comparison_op == 'LTE' or comparison_op == 'GTE' or comparison_op == 'LT' or comparison_op == 'GT':
                 if comparison_op == 'EQ':
                     df = pop_df[pop_df[column] == comparison_value]
-                elif comparison_op == 'NEQ':
+                elif comparison_op == 'NE':
                     df = pop_df[pop_df[column] != comparison_value]
                 elif comparison_op == 'LTE':
                     df = pop_df[pop_df[column] <= comparison_value]
@@ -99,7 +98,7 @@ class TableFilter(object):
         if isinstance(comparison_value, str):
             if comparison_op == 'EQ':
                 df = pop_df[pop_df[column].upper() == comparison_value.upper()]
-            elif comparison_op == 'NEQ':
+            elif comparison_op == 'NE':
                 df = pop_df[pop_df[column].upper() == comparison_value.upper()]
             else:
                 raise IOError(
@@ -117,10 +116,10 @@ class TableFilter(object):
         pop_df = self.filter_uniq()
 
         if isinstance(comparison_value, int) or isinstance(comparison_value, float):
-            if comparison_op == 'EQ' or comparison_op == 'NEQ' or comparison_op == 'LTE' or comparison_op == 'GTE' or comparison_op == 'LT' or comparison_op == 'GT':
+            if comparison_op == 'EQ' or comparison_op == 'NE' or comparison_op == 'LTE' or comparison_op == 'GTE' or comparison_op == 'LT' or comparison_op == 'GT':
                 if comparison_op == 'EQ':
                     df = pop_df[pop_df[column] == comparison_value]
-                elif comparison_op == 'NEQ':
+                elif comparison_op == 'NE':
                     df = pop_df[pop_df[column] != comparison_value]
                 elif comparison_op == 'LTE':
                     df = pop_df[pop_df[column] <= comparison_value]
@@ -133,12 +132,12 @@ class TableFilter(object):
                 else:
                     raise IOError(
                         "An exception was raised because you have deep psychological issues that affected your ability to use commandline tools.\n"
-                        "\n\tOnly 'EQ', 'NEQ', 'LTE', 'GTE', 'LT', or 'GT' can be used as operators.")
+                        "\n\tOnly 'EQ', 'NE', 'LTE', 'GTE', 'LT', or 'GT' can be used as operators.")
         # compare string values       
         if isinstance(comparison_value, str):
             if comparison_op == 'EQ':
                 df = pop_df[pop_df[column].upper() == comparison_value.upper()]
-            elif comparison_op == 'NEQ':
+            elif comparison_op == 'NE':
                 df = pop_df[pop_df[column].upper() == comparison_value.upper()]
             else:
                 raise IOError(
@@ -178,21 +177,13 @@ class TableFilter(object):
             print( 'You indicated that you both want to exclude duplicate values from a column and filter a column by a value. \n'
                    'We output the filtered column to ' + file_destination + 'filtered' )
             sys.exit(0)
-    
-        elif comp_op and comp_val:
-            df.to_csv(file_destination)
-        elif rm_dup:
-            df.to_csv(file_destination)
         else:
-            print( 'You indicated that you both want to exclude duplicate values from a column and filter a column by a value. \n'
-                   'As a result, we output the filtered column to ' + file_destination + 'filtered' )
+            df.to_csv(file_destination)
             
-    
-
     """ Process command-line arguments. """
     if __name__ == '__main__':
 
-        """ Create commandline functionality to the program """
+        """ Add commandline help functionality to the program """
         parser = argparse.ArgumentParser( add_help = True, description = "Allows users to filter CSV file in a variety of ways." )
 
         # NEED TO ADD PARSER GROUP CALLED 'Positional Arguments'
@@ -228,8 +219,7 @@ class TableFilter(object):
         column = args.column
         compare = args.compare 
         rmdup = args.rmdup
-
-
+        
         assert os.path.exists( str(os.getcwd()) + '/' + file )
 
         filter_object = TableFilter( file, column, file_dest, compare, rmdup)
