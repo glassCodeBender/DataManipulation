@@ -29,12 +29,12 @@ import sys
 
 class TableFilter(object):
 
-    def __init__(self, file18 = '', duplicate = '', file_destination = '', compare = '' ):
+    def __init__(self, file18 = '', duplicate = '', file_destination = '', comparison_op = '' ):
         self.__file = file18
         self.__duplicate_column = duplicate
         self.__file_dest = file_destination
         # Adding extra functionality to program
-        self.__compare = compare
+        self.__compare = comparison_op 
 
     """ Description: Method filters out the unique values in the column of a csv file.
         Return: DataFrame excluding the duplicate values """
