@@ -4,7 +4,7 @@
 (#)Title: tablefilter.py
 (#)Version: 1.0
 
-Writer's Note: Message me if you want me to add any functionality to the program, if you'd like me to write a subclass of the program,
+Writer's Note: Message me if you want me to add any functionality to the program, if you'd like me to write a subclass,
 or if you want to hire me for a job. I also know Scala and Java pretty well. 
 
 WARNING: The program does not currently work from the commandline. However, the main aspects of the program work. 
