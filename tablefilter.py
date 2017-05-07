@@ -5,7 +5,7 @@
 (#)Version: 1.0
 
 WARNING: Currently the program does not work from the commandline. However, the main aspects of the program work. I already
-used them to filter out duplicate names from an excel document.
+used them to filter out duplicate names from an excel document. Also, the --compare functionality has not been added yet.
 
 Program Purpose: Program allows users to remove duplicate values from a column in a csv file (or excel converted to csv). 
 The actual purpose of the program was to remove duplicate rows from an excel file so that I could use the sample data in 
@@ -81,7 +81,7 @@ class TableFilter(object):
         # parser.add_argument_group()
         parser.add_argument( '-d', '--dest', action = 'store', dest = 'file_destination', default= str( os.getcwd() ) + "/filteredcsvfile.csv", help = "Store the name of the file you'd like the program to create" )
         parser.add_argument( '-c', '--compare', action = 'store', dest = 'compare', help = 'Use "gt" for greater than, "lt" for less than, or "eq" for equals')
-        parser.add_argument( '-v', '--verbose', action = 'store_true', help = 'Increase the verbosity of the command.')
+        parser.add_argument( '-v', '--verbose', action = 'store_true', help = 'Increase the verbosity of the program.')
 
         if len(sys.argv) <= 2:
             parser.print_help()
