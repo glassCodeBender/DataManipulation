@@ -43,7 +43,7 @@ class TableFilter(object):
 
     """ Description: Method filters out the unique values in the column of a csv file.
         Return: DataFrame excluding the duplicate values """
-
+    
     def populate_df(self):
         try:
             csv_file = self.__file
@@ -55,7 +55,6 @@ class TableFilter(object):
 
     """ Description: Filters rows in a 2D array to only include the first occurrence of a value in a given column
         Returns: DataFrame """
-
     def filter_uniq(self):
         rm_duplicates = self.__rmdup
         assert rm_duplicates
@@ -68,7 +67,7 @@ class TableFilter(object):
 
     """ Description: Allows users to filter a column based on a given value and an operator 
         Returns: DataFrame with filtered content. """
-
+    
     def filter_by(self):
         comparison_op = self.__compare.upper()
         comparison_value = self.__comp_value
@@ -112,7 +111,7 @@ class TableFilter(object):
 
     """ Description: Allows users to apply both filter unique columns out and filter by an operator
         Returns: DataFrame """
-
+    
     def unique_and_filter(self):
         comparison_op, comparison_value, rm_dup, column = self.__compare, self.__comp_value, self.__rmdup, self.__column
         pop_df = self.filter_uniq()
@@ -154,7 +153,7 @@ class TableFilter(object):
 
     """ Description: Export to filtered DataFrame to CSV file. 
         Return: Void """
-
+    
     def export_to_CSV(self):
         file_destination = self.__file_dest
         comp_op, comp_val, rm_dup = self.__compare, self.__comp_value, self.__rmdup
