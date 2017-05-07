@@ -43,7 +43,7 @@ class TableFilter(object):
 
     """ Description: Method filters out the unique values in the column of a csv file.
         Return: DataFrame excluding the duplicate values """
-    
+
     def populate_df(self):
         try:
             csv_file = self.__file
@@ -63,11 +63,12 @@ class TableFilter(object):
         pop_df = self.populate_df
         pop_df['Unique'] = (pop_df[dup] == pop_df[dup].shift())
         filtered_df = pop_df[pop_df['Unique'] == False]
+        filtered_df.drop( 'Unique', axis = 1, inplace = True )
         return filtered_df
 
     """ Description: Allows users to filter a column based on a given value and an operator 
         Returns: DataFrame with filtered content. """
-    
+
     def filter_by(self):
         comparison_op = self.__compare.upper()
         comparison_value = self.__comp_value
@@ -107,11 +108,12 @@ class TableFilter(object):
 
         # NEED TO ADD DATETIME functionality!!!!!!!!
         df = pop_df[pop_df['Result'] == True]
+        df.drop( 'Result', axis = 1, inplace = True )
         return df
 
     """ Description: Allows users to apply both filter unique columns out and filter by an operator
         Returns: DataFrame """
-    
+
     def unique_and_filter(self):
         comparison_op, comparison_value, rm_dup, column = self.__compare, self.__comp_value, self.__rmdup, self.__column
         pop_df = self.filter_uniq()
@@ -153,7 +155,7 @@ class TableFilter(object):
 
     """ Description: Export to filtered DataFrame to CSV file. 
         Return: Void """
-    
+
     def export_to_CSV(self):
         file_destination = self.__file_dest
         comp_op, comp_val, rm_dup = self.__compare, self.__comp_value, self.__rmdup
