@@ -4,7 +4,7 @@
 (#)Title: tablefilter.py
 (#)Version: 1.0
 
-Message me if you want me to add any functionality to the program or if you want to hire me for a job. 
+Message me if you want me to add any functionality to the program or if you'd like to hire me for a job. 
 
 WARNING: The program does not currently work from the commandline. However, the main aspects of the program work. I already
 used them to filter out duplicate names from an excel document. Also, the --compare functionality has not been added yet.
