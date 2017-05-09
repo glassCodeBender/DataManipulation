@@ -115,7 +115,6 @@ class TableFilter(object):
         df = pop_df[pop_df['Result'] == True]
         df.drop('Result', axis = 1, inplace = True)
         return df
-        return df
 
     """ Description: Allows users to apply both filter unique columns out and filter by an operator
         Returns: DataFrame """
@@ -199,6 +198,7 @@ class TableFilter(object):
             sys.exit(0)
         else:
             df.to_csv(file_destination)
+            sys.exit(0)
 
     """ Process command-line arguments. """
     if __name__ == '__main__':
