@@ -23,6 +23,7 @@ __file_dest : Determines where the newly created csv file should save to.
     - I need to rewrite the program so that it saves to the default working directory when I add commandline arguments.
 __compare : Allows the user to determine an operator (>, <, !=, =) that they want to use to filter a value. 
 __comp_value : Accepts a String, Float, or Integer that the user wants to filter a column compared to.
+__rmdup : Accepts a Boolean that determines whether or not the user wants to remove duplicate values from a column.
 
 """
 
