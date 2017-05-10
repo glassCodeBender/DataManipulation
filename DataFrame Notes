@@ -1,0 +1,59 @@
+/**
+	* @author glassCodeBender
+  * 
+  * I was considering writing a DataFrame program for Scala, but then I found out that Apache Spark includes
+  * a supercharged DataFrame program so there's no reason to write it. Nevertheless, I wanted to save my notes. 
+  * Even though I didn't fully understand how I to organize the classes, I want to save the notes.
+	*
+	* This is a superclass of CDataFrame and RDataFrame:
+	* CDataFrame treats the data as if the DataFrame is a storage space for an Array going up and down
+	* RDataFrame is for a storage space that ges left and right
+	*
+	* There will also be a subclass of these classes that will
+	*/
+
+	// Object needs to store 4 Booleans
+
+	/* What does a DataFrame do?
+			1. Store different types of data in an array that either goes left and right or up and down.
+			2. You can do things on everything in one of those arrays.
+			3. The "direction" you go depends on the array that is chosen based on the index and direction booleans.
+			3. Value for Index
+			4. Store truthiness of index is determined by
+			5. Probably needs to be serializable.
+			6. Two states of DataFrame, going across and going down.
+			7 You can do things based on the integer that is called when you call colNo and Row No.
+			8. When you want to go to a specif location in the data frame, you use the col Array.
+	*/
+
+                      val index: Boolean,        // If True Index is row. If False Index is column.
+                      val direction: Boolean,   // Bool determines direction of array to operate on north/south False for east/west
+                      val colNo: Integer,       // y axis location
+                      val rowNo: Integer,       // x axis location
+                      val rowLength: Integer,   // Stores length of the array (max of the x axis)
+                      val colLength: Integer   // Stores the width of the array (max of the y axis)
+
+	// There needs to be a colNo and rowLength tuple stored in each Node of the DataFrame.
+	// Each colNo and rowNo tuple corresponds to a piece of data.
+  
+	val location = (colNo, rowNo) // END class DataFrame
+
+	// What all possible states are there.
+	// There must be at least two arrays in each object. N/S E/W
+	// There must be a String that can match w/ the name of the index.
+	// There must be a String that can match w/ the name of the column header.
+	// How many different arrays do we need to store.
+	// 1. Index is top E/W   Bool.
+	// 2. Index is top N/S   Bool.
+	// 3. index is left. E/W Bool.
+	// 4. Index is left N/S  Bool.
+	// I still think each node has north, west, east, south Boolean
+	// A Boolean to index that node is the end of the array.
+	// isIntanceOf() // determines object type
+	// Need code for nodes that save numbers, nodes that store strings, nodes for Booleans, and nodes that save other types of data.
+  // Think about the methods you call on 'df' versus the things that you do with the actual data.
+	// Node class will probably have StringNote, IntNode, DoubleNode, FloatNode, BoolNode, FileNode, and ObjectNode.
+	// How often do we need to create a new array.
+
+	// There must be at least two different Dataframes. One for north/sound and one for east west.
+	// Something that determines which column number the cHead is located at
