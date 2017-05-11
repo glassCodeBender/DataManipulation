@@ -11,9 +11,10 @@ in less than 2 days and I wrote the core components of the program (filter_uniqu
 WARNING: This program is a work in progress, but the main aspects of the program should work. I already used the 
 program logic to filter out duplicate names from an excel document in iPython. 
 
-Program Purpose: Program allows users to remove duplicate values from a column in a csv file (or from an Excel document 
-that was converted to a csv). The actual purpose of the program was to remove duplicate rows from an excel table so that 
-I could use the sample data in a database for a school project.
+Program Purpose: Program allows users to filter columns in a csv file. Users can either remove duplicate values from 
+a column or filter the column based on the operators "eq" (equals), "neq" (not equal), "lt" (less than), "gt" (greater than)
+"lte" (less than or equal to), "gte" (greater than or equal to). "get. The actual purpose of the program was to remove 
+duplicate rows from an excel table so that I could use the sample data in a database for a school project.
 
 Inputs:
 __file : Accepts String filename. Currently accepts only csv files.
