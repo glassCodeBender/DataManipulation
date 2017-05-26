@@ -244,7 +244,7 @@ class TableFilter(object):
 
         # moving parsed arguments to local variables just to be safe
         args = parser.parse_args()
-        file = args.file
+        filename = args.file
         file_dest = args.file_destination
         column = args.column
         compare = args.compare
@@ -252,7 +252,7 @@ class TableFilter(object):
 
         assert os.path.exists( str(os.getcwd()) + '/' + file )
 
-        filter_object = TableFilter(file, column, file_dest, compare, rmduplicate)
+        filter_object = TableFilter(filename, column, file_dest, compare, rmduplicate)
         filter_object.export_to_CSV()
 
         if args.verbose:
